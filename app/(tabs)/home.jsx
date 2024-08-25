@@ -9,9 +9,10 @@ import { StatusBar } from 'expo-status-bar';
 import { getAllPosts, getLatestPosts } from '../../lib/appwrite';
 import useAppwrite from '../../lib/useAppwrite';
 import VideoCard from '../../components/VideoCard';
+import { useGlobalContext } from '../../context/GlobalProvider';
 
 const Home = () => {
-
+  const {user,setUser,setIsLoggedIn} = useGlobalContext();
   const { data: posts, refetch } = useAppwrite(getAllPosts);
   const { data: latestPosts } = useAppwrite(getLatestPosts);
 
@@ -30,18 +31,17 @@ const Home = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={posts}
-        keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-          // <Text className='text-3xl text-white'>{item.title}</Text>
-           <VideoCard
-            title={item.title}
-            thumbnail={item.thumbnail}
-            video={item.video}
-            creator={item.creator.username}
-            avatar={item.creator.avatar}
-           />
-        )}
+      data={posts}
+      keyExtractor={(item) => item.$id}
+      renderItem={({ item }) => (
+        <VideoCard
+          title={item.title}
+          thumbnail={item.thumbnail}
+          video={item.video}
+          creator={item.creator.username}
+          avatar={item.creator.avatar}
+        />
+      )}
         ListHeaderComponent={() => (
           <View className="flex my-6 px-4 space-y-6">
             <View className="flex justify-between items-start flex-row mb-6">
@@ -50,7 +50,7 @@ const Home = () => {
                   Welcome Back
                 </Text>
                 <Text className="text-2xl font-psemibold text-white">
-                  srijanid
+                  {user?.username}
                 </Text>
               </View>
 

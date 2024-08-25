@@ -2,6 +2,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { icons } from '../constants';
 import { ResizeMode, Video } from 'expo-av';
+import SimpleMenu from './MenuIcon';
 
 const VideoCard = ({ title, creator, avatar, thumbnail, video }) => {
   const [play,setPlay] = useState(false);
@@ -34,7 +35,8 @@ const VideoCard = ({ title, creator, avatar, thumbnail, video }) => {
         </View>
 
         <View className="pt-2">
-          <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
+          {/* <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" /> */}
+          <SimpleMenu />
         </View>
       </View>
 
